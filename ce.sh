@@ -54,7 +54,7 @@ EOF
   fi 
 
   # lookup user input directory from current directory
-  srchres=$(find $PWD -type d -name "$srchdir")
+  srchres=$(find "$PWD" -type d -name "$srchdir")
   # count the number of results
   srchres_cnt=$(wc -l <<< "$srchres")
   
@@ -65,7 +65,7 @@ EOF
 	return 0
   # 1 directory result. go to that directory.
   elif [[ $srchres_cnt = 1 ]]; then
-    cd $srchdir
+    cd $srchdir || return
   else
   # more than 1 directories found. Choose one.
     echo "Multiple directories found. Choose number"
@@ -78,12 +78,12 @@ EOF
     done <<< "$srchres"
 
     echo "[Select] << "
-	read sel
+	read -r sel
 
     i=1
 	while IFS= read -r; do
-      if [[ $sel = $i ]]; then
-	    cd $REPLY
+      if [[ $sel = [[$i]] ]]; then
+	    cd $REPLY || return
       fi
 	  i=$((i+1))
 	done <<< "$srchres"
