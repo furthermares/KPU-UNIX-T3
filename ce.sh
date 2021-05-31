@@ -5,9 +5,6 @@ function ce(){
   FLAG_b=0
   FLAG_f=0
   FLAG_h=0
-  srchdir=0
-  srchres=0
-  srchres_cnt=0
 
   # print help [-h]
   function get_help(){
