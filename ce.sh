@@ -30,13 +30,14 @@ EOF
       h) FLAG_h=1 ;;
       b) FLAG_b=1 ;;
       f) FLAG_f=1 ;;
-      *) get_help ;;
+      *) get_help; return ;;
     esac
   done
 
   # option -h selected
   if (( FLAG_h )); then
 	get_help
+	return
   fi
 
   # print directory before ce
